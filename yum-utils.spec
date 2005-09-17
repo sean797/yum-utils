@@ -1,6 +1,6 @@
 Summary: Utilities based around the yum package manager
 Name: yum-utils
-Version: 0.3
+Version: 0.3.1
 Release: 1
 License: GPL
 Group: Development/Tools
@@ -91,6 +91,11 @@ fi
 /usr/lib/yum-plugins
 
 %changelog
+* Sat Sep 17 2005 Panu Matilainen <pmatilai@laiskiainen.org>
+- version 0.3.1
+- various enhancements and fixes to repoquery
+- avoid tracebacks in yumex and pup when changelog plugin is enabled
+
 * Mon Jul 25 2005 Panu Matilainen <pmatilai@laiskiainen.org>
 - bump version to 0.3
 - add yum-changelog subpackage
