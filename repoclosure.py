@@ -29,7 +29,7 @@ from yum.misc import getCacheDir
 from optparse import OptionParser
 import rpmUtils.arch
 from yum.constants import *
-
+from repomd.packageSack import ListPackageSack
 
 
 def evrTupletoVer(tuple):
@@ -62,7 +62,8 @@ def parseArgs():
         help="Use a temp dir for storing/accessing yum-cache")
     parser.add_option("-q", "--quiet", default=0, action="store_true", 
                       help="quiet (no output to stderr)")
-        
+    parser.add_option("-n", "--newest", default=0, action="store_true",
+                      help="check only the newest packages in the repos")
     (opts, args) = parser.parse_args()
     return (opts, args)
 
@@ -100,10 +101,18 @@ class RepoClosure(yum.YumBase):
         for repo in self.repos.listEnabled():
             self.repos.populateSack(which=[repo.id], with='filelists')
 
-    def getBrokenDeps(self):
+    def getBrokenDeps(self, newest=False):
         unresolved = {}
         resolved = {}
-        for pkg in self.pkgSack:
+        if newest:
+            pkgs = self.pkgSack.returnNewestByNameArch()
+        else:
+            pkgs = self.pkgSack
+
+        mypkgSack = ListPackageSack(pkgs)
+        pkgtuplist = mypkgSack.simplePkgList()
+        
+        for pkg in pkgs:
             for (req, flags, (reqe, reqv, reqr)) in pkg.returnPrco('requires'):
                 if req.startswith('rpmlib'): continue # ignore rpmlib deps
             
@@ -119,8 +128,22 @@ class RepoClosure(yum.YumBase):
                     if not unresolved.has_key(pkg):
                         unresolved[pkg] = []
                     unresolved[pkg].append((req, flags, ver))
-                else:
-                    resolved[(req,flags,ver)] = 1
+                    continue
+                    
+                if newest:
+                    resolved_by_newest = False
+                    for po in resolve_sack:# look through and make sure all our answers are newest-only
+                        if po.pkgtup in pkgtuplist:
+                            resolved_by_newest = True
+                            break
+
+                    if resolved_by_newest:                    
+                        resolved[(req,flags,ver)] = 1
+                    else:
+                        if not unresolved.has_key(pkg):
+                            unresolved[pkg] = []
+                        unresolved[pkg].append((req, flags, ver))                        
+                        
         return unresolved
     
     
@@ -159,8 +182,12 @@ def main():
     if not opts.quiet:
         print 'Checking Dependencies'
 
-    baddeps = my.getBrokenDeps()
-    num = len(my.pkgSack)
+    baddeps = my.getBrokenDeps(opts.newest)
+    if opts.newest:
+        num = len(my.pkgSack.returnNewestByNameArch())
+    else:
+        num = len(my.pkgSack)
+        
     repos = my.repos.listEnabled()
 
     if not opts.quiet:
