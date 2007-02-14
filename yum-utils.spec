@@ -117,7 +117,7 @@ Group: System Environment/Base
 Requires: yum >= 3.0
 
 %description -n yum-skip-broken
-This plugin adds a --ignore-broken to yum to make it possible to
+This plugin adds a --skip-broken to yum to make it possible to
 check packages for dependency problems and skip the one with problems.
 
 %package -n yum-priorities
@@ -242,6 +242,9 @@ fi
 
 
 %changelog
+* Wed Feb 14 2007 Tim Lauridsen <tla@rasmil.dk>
+- fixed skip-broken description (--ignore-broken -> --skip-broken)
+
 * Thu Feb 8 2007 Tim Lauridsen <tla@rasmil.dk>
 - Added man dirs to yum-changelog files section
 
