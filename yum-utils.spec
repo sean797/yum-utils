@@ -148,9 +148,6 @@ for plug in $plugins; do
     install -m 644 $plug/*.py $RPM_BUILD_ROOT/usr/lib/yum-plugins/
 done
 
-# install the blank list file for the versionlock plugin
-install -m 644 versionlock/versionlock.list $RPM_BUILD_ROOT/%{_sysconfdir}/yum/pluginconf.d/
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -211,7 +208,6 @@ fi
 %files -n yum-versionlock
 %defattr(-, root, root)
 %config(noreplace) %{_sysconfdir}/yum/pluginconf.d/versionlock.conf
-%config(noreplace) %{_sysconfdir}/yum/pluginconf.d/versionlock.list
 /usr/lib/yum-plugins/versionlock.*
 
 %files -n yum-tsflags
@@ -246,6 +242,9 @@ fi
 
 
 %changelog
+* Thu Feb 15 2007 Tim Lauridsen <tla@rasmil.dk>
+- removed versionlock.list installation.
+
 * Wed Feb 14 2007 Tim Lauridsen <tla@rasmil.dk>
 - Added versionlock.list installation.
 - fixed skip-broken description (--ignore-broken -> --skip-broken)
