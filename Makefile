@@ -46,7 +46,7 @@ upload: archive srpm
 	@rm -rf ${PKGNAME}-${VERSION}.tar.gz
 	
 ChangeLog: FORCE
-	@cvs2cl --utc
+	@cvs2cl --utc --follow yum-utils-1_0_X
 	
 	
 FORCE:	
