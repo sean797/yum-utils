@@ -242,6 +242,10 @@ fi
 
 
 %changelog
+* Mon Feb 19 2007 Tim Lauridsen <tla@rasmil.dk>
+- mark it as 1.0.3
+- Removed %%{?dist} tag
+
 * Thu Feb 15 2007 Tim Lauridsen <tla@rasmil.dk>
 - removed versionlock.list installation.
 
