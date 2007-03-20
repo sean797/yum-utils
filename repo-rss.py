@@ -182,7 +182,7 @@ def main(options, args):
     days = options.days
     repoids = args
     my = YumQuiet()
-    my.doConfigSetup(init_plugins=False)
+    my.doConfigSetup(init_plugins=True)
     if os.geteuid() != 0 or options.tempcache:
         cachedir = getCacheDir()
         if cachedir is None:

@@ -104,7 +104,7 @@ if __name__ == '__main__':
     (opts, args) = parser.parse_args()
 
     my = yumQuiet()
-    my.doConfigSetup(opts.conffile, init_plugins=False)
+    my.doConfigSetup(opts.conffile, init_plugins=True)
     cachedir = getCacheDir()
     my.repos.setCacheDir(cachedir)
 

@@ -111,7 +111,7 @@ def main():
         sys.exit(1)
         
     my = RepoSync(opts=opts)
-    my.doConfigSetup(fn=opts.config, init_plugins=False)
+    my.doConfigSetup(fn=opts.config, init_plugins=True)
     
     # do the happy tmpdir thing if we're not root
     if os.geteuid() != 0 or opts.tempcache:

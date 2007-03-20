@@ -128,7 +128,7 @@ def main():
         sys.exit(1)
         
     my = RepoTrack(opts=opts)
-    my.doConfigSetup(fn=opts.config,init_plugins=False) # init yum, without plugins
+    my.doConfigSetup(fn=opts.config,init_plugins=True) # init yum
     
     # do the happy tmpdir thing if we're not root
     if os.geteuid() != 0 or opts.tempcache:

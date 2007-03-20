@@ -635,7 +635,7 @@ def main(args):
         pkgops.append("queryformat")
 
     repoq = YumBaseQuery(pkgops, sackops, opts)
-    repoq.doConfigSetup(fn=opts.conffile, init_plugins=False)
+    repoq.doConfigSetup(fn=opts.conffile, init_plugins=True)
     
     if os.geteuid() != 0 or opts.tempcache:
         cachedir = misc.getCacheDir()

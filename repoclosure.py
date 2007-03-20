@@ -59,7 +59,7 @@ class RepoClosure(yum.YumBase):
         self.logger = logging.getLogger("yum.verbose.repoclosure")
         self.arch = arch
         self.builddeps = builddeps
-        self.doConfigSetup(fn = config,init_plugins=False)
+        self.doConfigSetup(fn = config,init_plugins=True)
         if hasattr(self.repos, 'sqlite'):
             self.repos.sqlite = False
             self.repos._selectSackType()

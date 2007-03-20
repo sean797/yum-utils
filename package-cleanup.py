@@ -37,7 +37,7 @@ from yum import Errors
 
 def initYum(opts):
     my = yum.YumBase()
-    my.doConfigSetup(opts.conffile,init_plugins=False)
+    my.doConfigSetup(opts.conffile,init_plugins=True)
     if opts.orphans:
         my.doRepoSetup()
     else:

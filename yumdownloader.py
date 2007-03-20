@@ -34,7 +34,7 @@ from urlparse import urljoin
 def initYum(yumconfigfile):
     global logger
     my = yum.YumBase()
-    my.doConfigSetup(fn=yumconfigfile,init_plugins=False) # init yum, without plugins
+    my.doConfigSetup(fn=yumconfigfile,init_plugins=True) # init yum, without plugins
     my.conf.uid = os.geteuid()
     if my.conf.uid != 0:
         cachedir = getCacheDir()
