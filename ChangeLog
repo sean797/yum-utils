@@ -1,3 +1,38 @@
+2007-03-20 08:03  timlau
+
+	* yum-utils.spec: bumped yum-utils version to 1.0.4
+
+2007-03-20 07:57  timlau
+
+	* package-cleanup.py, repo-graph.py, repo-rss.py, repoclosure.py,
+	  repoquery.py, reposync.py, repotrack.py, yumdownloader.py: Made
+	  the utils work with plugins, else they wont work with RHEL5,
+	  where the repos is set by a plugin.
+
+2007-03-13 11:50  timlau
+
+	* plugins/skip-broken/: skip-broken.conf, skip-broken.py: Added
+	  'check_always' option to the skip-broken plugin.  Setting
+	  'check_always=1' will make the skip-broken check run every time.
+	  (rhbz #231523) Also merged changes from yum-utils HEAD
+
+2007-02-19 15:27  pmatilai
+
+	* plugins/kernel-module/kernel-module.py: - fix deprecation warning
+	  (rhbz#222947)
+
+2007-02-19 10:00  timlau
+
+	* Makefile, yum-utils.spec: - Made 'make release' work with
+	  %{?dist} tag in spec.  - 'make ChangeLog' will follow CVS HEAD.
+	  - Added 'archive' dependency to 'make srpm' - Added %{?dist} to
+	  spec file again.
+
+2007-02-19 08:11  timlau
+
+	* ChangeLog, Makefile: updated 'make ChangeLog' to follow the
+	  'yum-utils-1_0_X' branch only.  Rebuild ChangeLog.
+
 2007-02-19 07:57  timlau
 
 	* yum-utils.spec: Updated changelog in spec file
