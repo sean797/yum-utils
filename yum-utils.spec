@@ -130,6 +130,17 @@ This plugin allows repositories to have different priorities.
 Packages in a repository with a lower priority can't be overridden by packages
 from a repository with a higher priority even if repo has a later version.
 
+%package -n yum-merge-conf
+Summary: Yum plugin to merge configuration changes when installing packages
+Group: System Environment/Base
+Requires: yum >= 3.0
+
+%description -n yum-merge-conf
+This yum plugin adds the "--merge-conf" command line option. With this option,
+Yum will ask you what to do with config files which have changed on updating a
+package.
+
+
 %prep
 %setup -q
 
@@ -139,7 +150,7 @@ make DESTDIR=$RPM_BUILD_ROOT install
 make -C updateonboot DESTDIR=$RPM_BUILD_ROOT install
 
 # Plugins to install
-plugins="changelog fastestmirror fedorakmod protectbase versionlock tsflags kernel-module downloadonly allowdowngrade skip-broken priorities"
+plugins="changelog fastestmirror fedorakmod protectbase versionlock tsflags kernel-module downloadonly allowdowngrade skip-broken priorities merge-conf"
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/yum/pluginconf.d/ $RPM_BUILD_ROOT/usr/lib/yum-plugins/
 
 cd plugins
@@ -240,8 +251,16 @@ fi
 %config(noreplace) %{_sysconfdir}/yum/pluginconf.d/priorities.conf
 /usr/lib/yum-plugins/priorities.*
 
+%files -n yum-merge-conf
+%defattr(-, root, root)
+%config(noreplace) %{_sysconfdir}/yum/pluginconf.d/merge-conf.conf
+/usr/lib/yum-plugins/merge-conf.*
+
 
 %changelog
+* Thu Apr 19 2007 Tim Lauridsen <tla@rasmil.dk>
+- Added merge-conf plugin written by Aurelien Bompard <abompard@fedoraproject.org>
+
 * Tue Mar 20 2007 Tim Lauridsen <tla@rasmil.dk>
 - mark it as 1.0.4
 
