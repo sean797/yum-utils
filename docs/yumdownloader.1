@@ -11,7 +11,9 @@ yumdownloader
 .SH "GENERAL OPTIONS"
 .IP "\fB\-h, \-\-help\fP"
 Help; display a help message and then quit\&.
-.IP "\fB\-\-destdir DIR\fP" 
+.IP "\fB\-c CONFIG, \-\-config=CONFIG\fP"
+Specify the config file to use.  Defaults to /etc/yum.conf.
+.IP "\fB\-\-destdir=DIR\fP" 
 Specify a destination directory for the download.  Defaults to the current directory.
 .IP "\fB\-\-urls\fP"
 Instead of downloading RPMs, list the URLs that would be downloaded.
@@ -19,6 +21,9 @@ Instead of downloading RPMs, list the URLs that would be downloaded.
 When downloading RPMs, resolve dependencies and also download the required packages.
 .IP "\fB\-\-source\fP"
 Instead of downloading the binary RPMs, download the source RPMs.
+.IP "\fB\-e REPO, \-\-enablerepo=REPO\fP"
+Enable a repository.  Using this option disables all repositories not explicitly
+enabled with \-\-enablerepo.  This option may be used multiple times.  
 
 .SH "EXAMPLES"
 .IP "Download the kernel RPM to /var/tmp:"
