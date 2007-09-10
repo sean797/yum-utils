@@ -1,3 +1,7 @@
+2007-09-10  Tim Lauridsen <tim@localhost.localdomain>
+
+	* ChangeLog, yum-utils.spec: bumped yum-utils version to 1.1.7
+
 2007-09-07  Seth Vidal <skvidal@fedoraproject.org>
 
 	* plugins/skip-broken/skip-broken.py: closes rh bug 281881 - don't
